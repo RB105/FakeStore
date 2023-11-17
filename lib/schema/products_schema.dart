@@ -1,7 +1,12 @@
+import 'package:isar/isar.dart';
+part 'products_schema.g.dart';
+
+@collection
 class ProductSchema {
+  Id i = Isar.autoIncrement;
   int? id;
   String? title;
-  dynamic price;
+  float? price;
   String? description;
   String? category;
   String? image;
@@ -17,15 +22,15 @@ class ProductSchema {
       this.rating});
 
   ProductSchema.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    price = json['price'];
-    description = json['description'];
-    category = json['category'];
-    image = json['image'];
+    id = json['id'] ?? 0;
+    title = json['title'] ?? "";
+    price = double.parse("${json['price'] ?? "0"}");
+    description = json['description'] ?? "";
+    category = json['category'] ?? "";
+    image = json['image'] ?? "";
     rating = json['rating'] != null
         ? Rating.fromJson(json['rating'])
-        : Rating(count: 0, rate: 0);
+        : Rating(count: 0.0, rate: 0.0);
   }
 
   Map<String, dynamic> toJson() {
@@ -43,15 +48,16 @@ class ProductSchema {
   }
 }
 
+@embedded
 class Rating {
-  num? rate;
-  num? count;
+  float? rate;
+  float? count;
 
   Rating({this.rate, this.count});
 
   Rating.fromJson(Map<String, dynamic> json) {
-    rate = json['rate'] ?? 0;
-    count = json['count'] ?? 0;
+    rate = double.parse("${json['rate'] ?? "0.0"}");
+    count = double.parse("${json['count'] ?? "0.0"}");
   }
 
   Map<String, dynamic> toJson() {

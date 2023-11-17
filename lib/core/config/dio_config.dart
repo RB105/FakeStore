@@ -18,9 +18,9 @@ class DioConfig {
         },
         receiveDataWhenStatusError: true));
 
-    dio.options.connectTimeout = const Duration(seconds: 40);
-    dio.options.receiveTimeout = const Duration(seconds: 40);
-    dio.options.sendTimeout = const Duration(seconds: 40);
+    dio.options.connectTimeout = const Duration(seconds: 30);
+    dio.options.receiveTimeout = const Duration(seconds: 30);
+    dio.options.sendTimeout = const Duration(seconds: 30);
     return dio;
   }
 
@@ -32,8 +32,10 @@ class DioConfig {
         return 'Connect time out';
       case DioExceptionType.sendTimeout:
         return 'Send time out';
-      case DioExceptionType.unknown:
-        return 'No internet connection';
+      case DioExceptionType.badResponse:
+        return 'Connection time out';
+      case DioExceptionType.connectionError:
+        return 'No internet';
       default:
         return 'Something went wrong';
     }

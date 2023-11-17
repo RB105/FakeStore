@@ -1,4 +1,4 @@
-import 'package:fakestore/bloc/home_states.dart';
+import 'package:fakestore/bloc/home/home_states.dart';
 import 'package:fakestore/core/widgets/loading_widget.dart';
 import 'package:fakestore/view/home/tab_bodies.dart';
 import 'package:flutter/material.dart';
