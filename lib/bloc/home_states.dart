@@ -13,8 +13,17 @@ class HomeInitState extends HomeStates {
 }
 
 class HomeSuccessState extends HomeStates {
-  List<ProductSchema> data;
-  HomeSuccessState(this.data);
+  List<ProductSchema> allData;
+  List<ProductSchema> electronic;
+  List<ProductSchema> jewelery;
+  List<ProductSchema> menClothes;
+  List<ProductSchema> womanClothes;
+  HomeSuccessState(
+      {required this.allData,
+      required this.electronic,
+      required this.jewelery,
+      required this.menClothes,
+      required this.womanClothes});
 }
 
 class HomeErrorState extends HomeStates {

@@ -21,6 +21,65 @@ class ProductsService with DioRequestConfig {
     }
   }
 
+  // get electronics
+  Future<NetworkResponse?> getElectronics() async {
+    NetworkResponse response =
+        await getRequest(endPoint: ProjectUrls.electronics);
+
+    if (response is NetworkSuccessResponse) {
+      List<ProductSchema> data = (response.data as List)
+          .map((e) => ProductSchema.fromJson(e))
+          .toList();
+      return NetworkSuccessResponse(data);
+    } else if (response is NetworkErrorResponse) {
+      return NetworkErrorResponse(response.error);
+    }
+  }
+
+  // get jewelery
+  Future<NetworkResponse?> getJewelery() async {
+    NetworkResponse response = await getRequest(endPoint: ProjectUrls.jewelery);
+
+    if (response is NetworkSuccessResponse) {
+      List<ProductSchema> data = (response.data as List)
+          .map((e) => ProductSchema.fromJson(e))
+          .toList();
+      return NetworkSuccessResponse(data);
+    } else if (response is NetworkErrorResponse) {
+      return NetworkErrorResponse(response.error);
+    }
+  }
+
+  // get men clothes
+  Future<NetworkResponse?> getMenClothes() async {
+    NetworkResponse response =
+        await getRequest(endPoint: ProjectUrls.menClothing);
+
+    if (response is NetworkSuccessResponse) {
+      List<ProductSchema> data = (response.data as List)
+          .map((e) => ProductSchema.fromJson(e))
+          .toList();
+      return NetworkSuccessResponse(data);
+    } else if (response is NetworkErrorResponse) {
+      return NetworkErrorResponse(response.error);
+    }
+  }
+
+  // get woman clothes
+  Future<NetworkResponse?> getWomanClothes() async {
+    NetworkResponse response =
+        await getRequest(endPoint: ProjectUrls.womenClothing);
+
+    if (response is NetworkSuccessResponse) {
+      List<ProductSchema> data = (response.data as List)
+          .map((e) => ProductSchema.fromJson(e))
+          .toList();
+      return NetworkSuccessResponse(data);
+    } else if (response is NetworkErrorResponse) {
+      return NetworkErrorResponse(response.error);
+    }
+  }
+
   // get categories
   Future<NetworkResponse?> getCategories() async {
     NetworkResponse response =

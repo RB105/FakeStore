@@ -1,5 +1,5 @@
 import 'package:fakestore/bloc/home_states.dart';
-import 'package:fakestore/view/home_page.dart';
+import 'package:fakestore/view/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
