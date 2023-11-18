@@ -3,7 +3,7 @@
 import 'package:fakestore/core/config/network_config.dart';
 import 'package:fakestore/core/config/requests_config.dart';
 import 'package:fakestore/core/constants/project_urls.dart';
-import 'package:fakestore/schema/products_schema.dart';
+import 'package:fakestore/schema/product/products_schema.dart';
 
 class ProductsService with DioRequestConfig {
   // get all products

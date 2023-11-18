@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:fakestore/schema/products_schema.dart';
+import 'package:fakestore/core/extensions/products_list_ext.dart';
+import 'package:fakestore/schema/product/products_schema.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:isar/isar.dart';
 
@@ -14,7 +15,7 @@ class CartsLocalDB {
       return 'Empty';
     } else {
       await isar.close();
-      return products;
+      return products.removeDuplicates();
     }
   }
 
@@ -30,6 +31,14 @@ class CartsLocalDB {
     await openDB();
     await isar.writeTxn(() async {
       await isar.productSchemas.put(product);
+    });
+    await isar.close();
+  }
+
+  Future<void> deleteById(int id) async {
+    await openDB();
+    await isar.writeTxn(() async {
+      await isar.productSchemas.delete(id);
     });
     await isar.close();
   }

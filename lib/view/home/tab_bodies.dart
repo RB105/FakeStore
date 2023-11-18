@@ -1,6 +1,6 @@
 import 'package:fakestore/core/extensions/build_context_ext.dart';
-import 'package:fakestore/schema/products_schema.dart';
-import 'package:fakestore/view/screens/info_page.dart';
+import 'package:fakestore/schema/product/products_schema.dart';
+import 'package:fakestore/view/home/info_page.dart';
 import 'package:flutter/material.dart';
 
 class TabBodyWidget extends StatelessWidget {
@@ -47,8 +47,9 @@ class TabBodyWidget extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         subtitle: Text(
-                            "Rating: ${productsList[index].rating?.rate ?? 0} (${productsList[index].rating?.count} rates)"),
-                        trailing: Text("﹩${productsList[index].price}"),
+                            "Rating: ${productsList[index].rating?.rate?.toStringAsFixed(1)??""} (${productsList[index].rating?.count??""} rates)"),
+                        trailing: Text(
+                            "﹩${productsList[index].price?.toStringAsFixed(1) ?? ""}"),
                       ))
                 ],
               ),

@@ -12,4 +12,7 @@ class ProjectUrls {
   static const String jewelery = '/products/category/jewelery';
   static const String menClothing = "/products/category/men's clothing";
   static const String womenClothing = "/products/category/women's clothing";
+
+  // carts
+  static const String allCarts = "/carts";
 }

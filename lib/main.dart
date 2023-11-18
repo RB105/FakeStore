@@ -1,4 +1,4 @@
-
+import 'package:fakestore/bloc/admin/admin_states.dart';
 import 'package:fakestore/bloc/carts/carts_states.dart';
 import 'package:fakestore/bloc/home/home_states.dart';
 import 'package:fakestore/view/screens/current_screen.dart';
@@ -10,7 +10,12 @@ void main(List<String> args) {
     BlocProvider(
       create: (context) => HomeCubit(), // home page logic
     ),
-    BlocProvider(create: (context) => CartCubit(),)
+    BlocProvider(
+      create: (context) => AdminCubit(),
+    ),
+    BlocProvider(
+      create: (context) => CartCubit(),
+    )
   ], child: const MyApp()));
 }
 

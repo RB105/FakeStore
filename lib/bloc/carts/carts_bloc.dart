@@ -17,6 +17,11 @@ class CartCubit extends Cubit<CartStates> {
     }
   }
 
+  Future<void> deleteById(Id id) async {
+    await cartsLocalDB.deleteById(id);
+    await getCarts();
+  }
+
   Future<void> addToCart({required ProductSchema product}) async {
     await cartsLocalDB.addDB(product);
     await getCarts();

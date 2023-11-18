@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:fakestore/core/config/network_config.dart';
-import 'package:fakestore/schema/products_schema.dart';
+import 'package:fakestore/schema/product/products_schema.dart';
 import 'package:fakestore/service/products_service.dart';
 part 'home_cubit.dart';
 
