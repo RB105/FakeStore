@@ -23,52 +23,57 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeStates>(
       builder: (context, state) => Scaffold(
-          appBar: AppBar(
-            title: const Text('Fake Store'),
-            bottom: TabBar(
-                isScrollable: true,
-                controller: controller,
-                tabs: const <Tab>[
-                  Tab(
-                    text: 'All',
-                  ),
-                  Tab(
-                    text: 'Electronics',
-                  ),
-                  Tab(
-                    text: 'Jewelery',
-                  ),
-                  Tab(
-                    text: "Men's clothing",
-                  ),
-                  Tab(
-                    text: "Woman's clothing",
-                  ),
-                ]),
-          ),
-          body: Builder(
-            builder: (context) {
-              if (state is HomeLoadingState) {
-                return const LoadingWidget();
-              } 
-              else if (state is HomeSuccessState) {
-                return TabBarView(controller: controller, children: <Widget>[
-                  TabBodyWidget(productsList: state.allData),
-                  TabBodyWidget(productsList: state.electronic),
-                  TabBodyWidget(productsList: state.jewelery),
-                  TabBodyWidget(productsList: state.menClothes),
-                  TabBodyWidget(productsList: state.womanClothes)
-                ]);
-              } 
-              else if (state is HomeErrorState) {
-                return Center(
-                  child: Text(state.error),
-                );
-              } else {
-                return const LoadingWidget();
-              }
-            },
-          )),
+        appBar: AppBar(
+          title: const Text('Fake Store'),
+          bottom: TabBar(
+              isScrollable: true,
+              controller: controller,
+              tabs: const <Tab>[
+                Tab(
+                  text: 'All',
+                ),
+                Tab(
+                  text: 'Electronics',
+                ),
+                Tab(
+                  text: 'Jewelery',
+                ),
+                Tab(
+                  text: "Men's clothing",
+                ),
+                Tab(
+                  text: "Woman's clothing",
+                ),
+              ]),
+        ),
+        body: Builder(
+          builder: (context) {
+            if (state is HomeLoadingState) {
+              return const LoadingWidget();
+            } else if (state is HomeSuccessState) {
+              return TabBarView(controller: controller, children: <Widget>[
+                TabBodyWidget(productsList: state.allData),
+                TabBodyWidget(productsList: state.electronic),
+                TabBodyWidget(productsList: state.jewelery),
+                TabBodyWidget(productsList: state.menClothes),
+                TabBodyWidget(productsList: state.womanClothes)
+              ]);
+            } else if (state is HomeErrorState) {
+              return Center(
+                child: Text(state.error),
+              );
+            } else {
+              return const LoadingWidget();
+            }
+          },
+        ),
+        floatingActionButton: state is HomeErrorState
+            ? IconButton(
+                onPressed: () async {
+                  await context.read<HomeCubit>().getAllProducts();
+                }, icon: const Icon(Icons.refresh))
+            : const SizedBox(),
+      ),
     );
   }
 }

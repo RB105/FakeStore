@@ -28,39 +28,37 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                 child: Text(state.error),
               );
             } else if (state is AdminSuccessState) {
-              return ListView.builder(
-                itemCount: state.data.length,
-                itemBuilder: (context, index) {
-                  return ExpansionTile(
-                      title: Text("User: ${state.data[index].userId ?? ""}"),
-                      subtitle: Text(state.data[index].date ?? ""),
-                      children: List.generate(
+              return RefreshIndicator(
+                onRefresh: () => context.read<AdminCubit>().getAllCarts(),
+                child: ListView.builder(
+                  itemCount: state.data.length,
+                  itemBuilder: (context, index) {
+                    return ExpansionTile(
+                        title: Text("User: ${state.data[index].userId ?? ""}"),
+                        subtitle: Text("Date: ${state.data[index].date ?? ""}"),
+                        children: List.generate(
                           state.data[index].products?.length ?? 0,
                           (int i) => ListTile(
                             title: Text(
-                                "${state.data[index].products?[i].productId ?? ""}"),
+                                "Product id: ${state.data[index].products?[i].productId ?? ""}"),
                             trailing: Text(
-                                "${state.data[index].products?[i].quantity ?? ""}"),
-                          ),)
-                      // [
-                      //   ListView.builder(
-                      //     itemCount: state.data[index].products?.length ?? 0,
-                      //     itemBuilder: (context, int i) => ListTile(
-                      //       title: Text(
-                      //           "${state.data[index].products?[i].productId ?? ""}"),
-                      //       trailing: Text(
-                      //           "${state.data[index].products?[i].quantity ?? ""}"),
-                      //     ),
-                      //   )
-                      // ],
-                      );
-                },
+                                "Quantity: ${state.data[index].products?[i].quantity ?? ""}"),
+                          ),
+                        ));
+                  },
+                ),
               );
             } else {
               return const SizedBox();
             }
           },
         ),
+        floatingActionButton: state is AdminErrorState
+            ? IconButton(
+                onPressed: () async {
+                  await context.read<AdminCubit>().getAllCarts();
+                }, icon: const Icon(Icons.refresh))
+            : const SizedBox(),
       ),
     );
   }

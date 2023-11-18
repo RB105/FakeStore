@@ -33,7 +33,7 @@ class CartsPage extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
-                              CartInfoPage(product: state.products[index]),
+                              CartInfoPage(product: state.products[index],index: index),
                         ));
                       },
                       child: Container(
@@ -47,13 +47,16 @@ class CartsPage extends StatelessWidget {
                           children: [
                             Expanded(
                                 flex: 8,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                              state.products[index].image ??
-                                                  ""),
-                                          fit: BoxFit.contain)),
+                                child: Hero(
+                                  tag: "cart$index",
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                state.products[index].image ??
+                                                    ""),
+                                            fit: BoxFit.contain)),
+                                  ),
                                 )),
                             Expanded(
                                 flex: 2,

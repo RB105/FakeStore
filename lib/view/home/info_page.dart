@@ -2,12 +2,14 @@ import 'package:fakestore/bloc/carts/carts_states.dart';
 import 'package:fakestore/core/extensions/build_context_ext.dart';
 import 'package:fakestore/core/widgets/horizontal_padding.dart';
 import 'package:fakestore/schema/product/products_schema.dart';
+import 'package:fakestore/view/screens/current_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InfoPage extends StatefulWidget {
+  final int index;
   final ProductSchema product;
-  const InfoPage({super.key, required this.product});
+  const InfoPage({super.key, required this.product, required this.index});
 
   @override
   State<InfoPage> createState() => _InfoPageState();
@@ -25,12 +27,15 @@ class _InfoPageState extends State<InfoPage> {
       ),
       body: ListView(
         children: [
-          Container(
-            width: double.infinity,
-            height: context.height * 0.4,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(widget.product.image ?? ""))),
+          Hero(
+            tag: '${widget.index}',
+            child: Container(
+              width: double.infinity,
+              height: context.height * 0.4,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(widget.product.image ?? ""))),
+            ),
           ),
           ListTile(
             isThreeLine: true,
@@ -49,10 +54,12 @@ class _InfoPageState extends State<InfoPage> {
                 ? ProjectHorizontalPadding(
                     child: Row(
                       children: [
-                        Expanded(child: Text("﹩${widget.product.price! * count}  $count on cart")),
+                        Expanded(
+                            child: Text(
+                                "﹩${widget.product.price! * count}  $count on cart")),
                         Expanded(
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             ElevatedButton(
                                 onPressed: () {
@@ -64,6 +71,12 @@ class _InfoPageState extends State<InfoPage> {
                             IconButton(
                                 onPressed: () {
                                   // navigation
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CurrentScreen(index: 1),
+                                      ),
+                                      (route) => false);
                                 },
                                 icon: const Icon(
                                     Icons.shopping_cart_checkout_sharp))

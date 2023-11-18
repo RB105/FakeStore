@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartInfoPage extends StatefulWidget {
+  final int index;
   final ProductSchema product;
-  const CartInfoPage({super.key, required this.product});
+  const CartInfoPage({super.key, required this.product, required this.index});
 
   @override
   State<CartInfoPage> createState() => _CartInfoPageState();
@@ -24,12 +25,15 @@ class _CartInfoPageState extends State<CartInfoPage> {
       ),
       body: ListView(
         children: [
-          Container(
-            width: double.infinity,
-            height: context.height * 0.4,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(widget.product.image ?? ""))),
+          Hero(
+            tag: 'cart${widget.index}',
+            child: Container(
+              width: double.infinity,
+              height: context.height * 0.4,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(widget.product.image ?? ""))),
+            ),
           ),
           ListTile(
             isThreeLine: true,
@@ -45,14 +49,15 @@ class _CartInfoPageState extends State<CartInfoPage> {
             visible: !isDeleted,
             child: BlocBuilder<CartCubit, CartStates>(
               builder: (context, state) => ElevatedButton(
-                  onPressed: () async {
-                    await context
+                  onPressed: ()  {
+                     context
                         .read<CartCubit>()
                         .deleteById(widget.product.i);
 
                     setState(() {
                       isDeleted = true;
                     });
+                    Navigator.pop(context);
                   },
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
