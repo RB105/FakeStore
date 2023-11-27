@@ -37,7 +37,7 @@ class DioConfig {
       case DioExceptionType.connectionError:
         return 'No internet';
       default:
-        return 'Something went wrong';
+        return e.message??"Something went wrong";
     }
   }
 }

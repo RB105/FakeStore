@@ -1,12 +1,11 @@
-import 'package:isar/isar.dart';
-part 'products_schema.g.dart';
 
-@collection
+
+
 class ProductSchema {
-  Id i = Isar.autoIncrement;
+
   int? id;
   String? title;
-  float? price;
+  double? price;
   String? description;
   String? category;
   String? image;
@@ -48,10 +47,10 @@ class ProductSchema {
   }
 }
 
-@embedded
+
 class Rating {
-  float? rate;
-  float? count;
+  double? rate;
+  double? count;
 
   Rating({this.rate, this.count});
 

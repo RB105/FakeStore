@@ -1,22 +1,7 @@
-import 'package:fakestore/bloc/admin/admin_states.dart';
-import 'package:fakestore/bloc/carts/carts_states.dart';
-import 'package:fakestore/bloc/home/home_states.dart';
-import 'package:fakestore/view/screens/current_screen.dart';
+import 'package:fakestore/view/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 void main(List<String> args) {
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider(
-      create: (context) => HomeCubit(), // home page logic
-    ),
-    BlocProvider(
-      create: (context) => AdminCubit(),
-    ),
-    BlocProvider(
-      create: (context) => CartCubit(),
-    )
-  ], child: const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,9 +9,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CurrentScreen(index: 0),
+      home: HomeScreen(),
     );
   }
 }

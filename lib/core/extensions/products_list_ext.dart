@@ -1,5 +1,5 @@
 
-import 'package:fakestore/schema/product/products_schema.dart';
+import 'package:fakestore/schema/products_schema.dart';
 
 extension ProductsList on List<ProductSchema> {
   List<ProductSchema> removeDuplicates() {
